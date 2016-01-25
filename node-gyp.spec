@@ -4,8 +4,8 @@
 %{?nodejs_find_provides_and_requires}
 
 Name:       %{?scl_prefix}node-gyp
-Version:    1.0.2
-Release:    3.sc1%{?dist}
+Version:    3.2.0
+Release:    2%{?dist}
 Summary:    Node.js native addon build tool
 License:    MIT
 Group:      System Environment/Libraries
@@ -23,7 +23,6 @@ Patch1:     node-gyp-addon-gypi.patch
 # for the currently running node version
 #use gyp from scl
 Patch2:    node-gyp-use-system-gyp.patch
-Patch3:    node-gyp-externalgyp.patch
 BuildRequires:  %{?scl_prefix}nodejs-devel
 
 #gyp is the actual build framework node-gyp uses
@@ -44,11 +43,9 @@ program which is removed for node v0.8.
 
 %patch2 -p1
 %patch1 -p1
-%patch3 -p1
 %nodejs_fixdep request 2.x
-%nodejs_fixdep semver 2.x
 %nodejs_fixdep nopt 3.x
-%nodejs_fixdep glob 4.x
+%nodejs_fixdep minimatch 3.x
 
 %build
 #nothing to do
@@ -75,6 +72,12 @@ rm -rf %{buildroot}
 %doc README.md LICENSE
 
 %changelog
+* Mon Nov 30 2015 Tomas Hrcka <thrcka@redhat.com> - 3.2.0-2
+- New upstream release
+
+* Thu Jul 23 2015 Tomas Hrcka <thrcka@redhat.com> - 2.0.2-1
+- Rebase to latest upstream stable
+
 * Thu Jan 29 2015 Tomas Hrcka <thrcka@redhat.com> - 1.0.2-3
 - Fix dependencies versions of nopt and glob
 - Backport Patch1  to new sources
