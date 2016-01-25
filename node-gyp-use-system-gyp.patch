@@ -1,25 +1,26 @@
-From f38147792fde04e1b223216ca6283777eb2022ff Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Tom=C3=A1=C5=A1=20Hr=C4=8Dka?= <thrcka@redhat.com>
-Date: Fri, 30 Jan 2015 08:56:50 +0100
-Subject: [PATCH] Use system gyp
+From 98b7b50acf8aba204c25ca10672b0e318467e192 Mon Sep 17 00:00:00 2001
+From: Tomas Hrcka <thrcka@redhat.com>
+Date: Mon, 30 Nov 2015 10:17:06 +0100
+Subject: [PATCH] ides
 
 ---
  lib/configure.js | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/lib/configure.js b/lib/configure.js
-index 68f26d6..6f4fd40 100644
+index 4e06529..a446943 100644
 --- a/lib/configure.js
 +++ b/lib/configure.js
-@@ -297,7 +297,7 @@ function configure (gyp, argv, callback) {
-     })
+@@ -247,7 +247,7 @@ function configure (gyp, argv, callback) {
+     }
  
      // this logic ported from the old `gyp_addon` python file
 -    var gyp_script = path.resolve(__dirname, '..', 'gyp', 'gyp_main.py')
 +    var gyp_script = '/opt/rh/v8314/root/usr/bin/gyp'
      var addon_gypi = path.resolve(__dirname, '..', 'addon.gypi')
-     var common_gypi = path.resolve(nodeDir, 'common.gypi')
-     var output_dir = 'build'
+     var common_gypi = path.resolve(nodeDir, 'include/node/common.gypi')
+     fs.stat(common_gypi, function (err, stat) {
 -- 
-1.8.3.1
+2.5.0
+>>>>>>> rhscl-2.1-nodejs010-rhel-6
 
