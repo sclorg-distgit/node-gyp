@@ -1,0 +1,17 @@
+---
+diff --git a/lib/configure.js b/lib/configure.js
+index 4e06529..a446943 100644
+--- a/lib/configure.js
++++ b/lib/configure.js
+@@ -247,7 +247,7 @@ function configure (gyp, argv, callback) {
+     }
+ 
+     // this logic ported from the old `gyp_addon` python file
+-    var gyp_script = path.resolve(__dirname, '..', 'gyp', 'gyp_main.py')
++    var gyp_script = '/opt/rh/rh-nodejs4/root/usr/bin/gyp'
+     var addon_gypi = path.resolve(__dirname, '..', 'addon.gypi')
+     var common_gypi = path.resolve(nodeDir, 'include/node/common.gypi')
+     fs.stat(common_gypi, function (err, stat) {
+-- 
+2.5.0
+
