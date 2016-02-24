@@ -5,7 +5,7 @@
 
 Name:       %{?scl_prefix}node-gyp
 Version:    3.2.0
-Release:    6%{?dist}
+Release:    7%{?dist}
 Summary:    Node.js native addon build tool
 License:    MIT
 Group:      System Environment/Libraries
@@ -47,6 +47,10 @@ program which is removed for node v0.8.
 %nodejs_fixdep nopt 3.x
 %nodejs_fixdep minimatch 3.x
 %nodejs_fixdep --caret
+%nodejs_fixdep glob 5.x
+%nodejs_fixdep semver 5.x
+%nodejs_fixdep npmlog 2.x
+
 %build
 #nothing to do
 
@@ -74,6 +78,9 @@ rm -rf %{buildroot}
 %doc README.md LICENSE
 
 %changelog
+* Tue Feb 23 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 3.2.0-7
+- Fix dependencies
+
 * Wed Feb 17 2016 Tomas Hrcka <thrcka@redhat.com> - 3.2.0-6
 - Rebase patches to new collection paths
 - Remove --no-parallel argument from default config
