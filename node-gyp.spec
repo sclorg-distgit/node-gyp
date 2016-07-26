@@ -5,7 +5,7 @@
 
 Name:       %{?scl_prefix}node-gyp
 Version:    3.2.0
-Release:    2%{?dist}
+Release:    3%{?dist}
 Summary:    Node.js native addon build tool
 License:    MIT
 Group:      System Environment/Libraries
@@ -18,11 +18,15 @@ ExclusiveArch: %{nodejs_arches} noarch
 
 # These patches are Fedora-specific for the moment, although I'd like to find
 # a way to support this kind of stuff upstream.
-Patch1:     node-gyp-addon-gypi.patch
+#Patch1:     node-gyp-addon-gypi.patch
 # use RPM installed headers by default instead of downloading a source tree
 # for the currently running node version
 #use gyp from scl
-Patch2:    node-gyp-use-system-gyp.patch
+#Patch2:    node-gyp-use-system-gyp.patch
+
+#Merge patches together and fix #1255594
+Patch3:     node-gyp-system-stuff.patch
+
 BuildRequires:  %{?scl_prefix}nodejs-devel
 
 #gyp is the actual build framework node-gyp uses
@@ -41,8 +45,10 @@ program which is removed for node v0.8.
 %prep
 %setup -q -n package
 
-%patch2 -p1
-%patch1 -p1
+#%patch2 -p1
+#%patch1 -p1
+%patch3 -p1
+
 %nodejs_fixdep request 2.x
 %nodejs_fixdep nopt 3.x
 %nodejs_fixdep minimatch 3.x
@@ -72,6 +78,9 @@ rm -rf %{buildroot}
 %doc README.md LICENSE
 
 %changelog
+* Wed Jun 15 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 3.2.0-3
+- Resolves: #1255594, merge patches together
+
 * Mon Nov 30 2015 Tomas Hrcka <thrcka@redhat.com> - 3.2.0-2
 - New upstream release
 
