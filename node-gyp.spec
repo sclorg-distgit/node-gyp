@@ -5,7 +5,7 @@
 
 Name:       %{?scl_prefix}node-gyp
 Version:    3.3.1
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Node.js native addon build tool
 License:    MIT
 URL:        https://github.com/TooTallNate/node-gyp
@@ -35,8 +35,8 @@ Requires:   %{?scl_prefix}nodejs-devel %{?scl_prefix}libuv-devel %{?scl_prefix}h
 # we also need a C++ compiler to actually build stuff
 # switching to dts-4 because C++11
 # gcc is probably not needed, but better to have
-Requires:   devtoolset-4-gcc-c++
-Requires:   devtoolset-4-gcc
+Requires:   devtoolset-6-gcc-c++
+Requires:   devtoolset-6-gcc
 #node-gyp needs python and make too
 Requires:   python-devel
 Requires:   make
@@ -83,6 +83,9 @@ ln -sf ../lib/node_modules/node-gyp/bin/node-gyp.js %{buildroot}%{_bindir}/node-
 %doc README.md LICENSE
 
 %changelog
+* Thu Feb 23 2017 Zuzana Svetlikova <zsvetlik@redhat.com> - 3.3.1-5
+- Update dts (RHBZ#1419569)
+
 * Thu Jun 09 2016 Zuzana Svetlikova <zsvetlik@redhat.com> - 3.3.1-4
 - Resolves rhbz#1343976
 - Depends on dts-4 during runtime (related 1341138)
